@@ -443,6 +443,52 @@
             "sort_fn": "TileStache.Goodies.VecTiles.sort.water"
         }
     }
+},
+    "openvenues": {
+    "allowed origin": "*",
+    "cache lifespan": "<%= node[:mapzen_tilestache][:max_age] %>",
+    "maximum cache age": "<%= node[:mapzen_tilestache][:max_age] %>",
+    "provider": {
+        "class": "TileStache.Goodies.VecTiles:Provider",
+        "kwargs": {
+            "dbinfo": {
+                "host": "<%= node[:mapzen][:postgresql][:endpoint] %>",
+                "port": 5432,
+                "user": "gisuser",
+                "database": "tilestache-gis",
+                "password": "<%= node[:mapzen][:secrets][:postgresql][:password][:gisuser] %>"
+            },
+            "queries": [
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                "<%= node[:mapzen_tilestache][:query_dir_name] %>/current/queries/openvenues-z14.pgsql",
+                "<%= node[:mapzen_tilestache][:query_dir_name] %>/current/queries/openvenues-z14.pgsql",
+                "<%= node[:mapzen_tilestache][:query_dir_name] %>/current/queries/openvenues-z16.pgsql",
+                "<%= node[:mapzen_tilestache][:query_dir_name] %>/current/queries/openvenues-z17.pgsql"
+            ],
+            "geometry_types": [
+                "Point"
+            ],
+            "transform_fns": [
+                "TileStache.Goodies.VecTiles.transform.add_id_to_properties",
+                "TileStache.Goodies.VecTiles.transform.detect_osm_relation",
+                "TileStache.Goodies.VecTiles.transform.remove_feature_id"
+            ],
+            "sort_fn": "TileStache.Goodies.VecTiles.sort.pois"
+        }
+    }
 }
   },
   "logging": "info"
